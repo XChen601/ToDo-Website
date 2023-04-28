@@ -1,5 +1,7 @@
+import Project from "./project.js";
 const ProjectList = (() => {
-    const projects = [];
+    const projects = [Project("Default Project")];
+    let currentProject = projects[0];
     const addProject = (project) => {
         projects.push(project);
     }
@@ -7,7 +9,12 @@ const ProjectList = (() => {
         projects.splice(projects.indexOf(project), 1);
 
     }
-    return { projects, addProject, removeProject };
+    const createProject = (title) => {
+        const project = Project(title);
+        addProject(project);
+        return project;
+    }
+    return { projects, addProject, removeProject, createProject, currentProject };
 })();
 
 export default ProjectList;
