@@ -23,6 +23,10 @@ const displayProjects = () => {
     ProjectList.projects.forEach(project => {
         const projectDiv = document.createElement("button");
         projectDiv.classList.add("project");
+        // if project is current project, add active class
+        if (project === ProjectList.currentProject) {
+            projectDiv.classList.add("active");
+        }
         projectDiv.innerHTML = `
             <div class="project-title">${project.title}</div>
         `;
@@ -35,6 +39,7 @@ const displayProjects = () => {
             ProjectList.currentProject = project;
             updateProjectBanner();
             displayTasks();
+            displayProjects();
         });
     });
 
@@ -140,7 +145,6 @@ const createTaskPopUp = () => {
     taskPopUp.setAttribute("id", "task-pop-up");
     taskPopUp.innerHTML = `
         <div class="task-pop-up-content">
-            <span class="close">&times;</span>
             <form>
                 <label for="task-title">Title</label>
                 <input type="text" id="task-title" name="task-title" placeholder="Task Title">
@@ -149,6 +153,7 @@ const createTaskPopUp = () => {
                 <label for="task-due-date">Due Date</label>
                 <input type="date" id="task-due-date" name="task-due-date">
                 <input type="submit" value="Submit">
+                <button type="button" class="cancel-task">Cancel</button>
             </form>
         </div>
     `;
@@ -163,6 +168,15 @@ const createTaskPopUp = () => {
         ProjectList.currentProject.addTask(task);
         taskPopUp.remove();
         displayTasks();
+        // toggle active class to button
+        const addTaskButton = document.querySelector(".add-task-button");
+        addTaskButton.classList.toggle("active");
+    });
+
+    // on cancel, remove task pop up
+    const cancelButton = document.querySelector(".cancel-task");
+    cancelButton.addEventListener("click", () => {
+        taskPopUp.remove();
         // toggle active class to button
         const addTaskButton = document.querySelector(".add-task-button");
         addTaskButton.classList.toggle("active");
