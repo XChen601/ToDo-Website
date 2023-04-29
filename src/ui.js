@@ -4,7 +4,7 @@ import ProjectList from "./projectList";
 
 const UI = () => {
 
-    const testTask = Task("Test Task", "This is a test task", "2021-01-01");
+    const testTask = Task("Finish ToDo", "Finish this todo website that includes projects and stuff", "2023-04-24");
     ProjectList.currentProject.addTask(testTask);
 
     // add a task to the current project
@@ -110,10 +110,22 @@ const displayTasks = () => {
             <div class="task-title">${task.title}</div>
             <div class="task-description">${task.description}</div>
             <div class="task-due-date">${task.dueDate}</div>
-            <div class="task-delete">X</div>
+            <button class="task-delete">X</button>
         `;
         tasksDiv.appendChild(taskDiv);
     });
+    // add event listener to task delete button
+    const taskDeleteButtons = document.querySelectorAll(".task-delete");
+    taskDeleteButtons.forEach(button => {
+        button.addEventListener("click", () => {
+            const taskDiv = button.parentElement;
+            const taskTitle = taskDiv.querySelector(".task-title").innerHTML;
+            const task = ProjectList.currentProject.tasks.find(task => task.title === taskTitle);
+            ProjectList.currentProject.removeTask(task);
+            displayTasks();
+        });
+    });
+
 }
 
 const createTaskBtn = () => {
@@ -121,7 +133,7 @@ const createTaskBtn = () => {
 
     const addTaskButton = document.createElement("button");
     addTaskButton.classList.add("add-task-button");
-    addTaskButton.innerHTML = "Add Task";
+    addTaskButton.innerHTML = "Add Task +";
     addTaskButton.addEventListener("click", () => {
         // toggle active class to button
         addTaskButton.classList.toggle("active");

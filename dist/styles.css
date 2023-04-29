@@ -44,7 +44,6 @@ nav {
 }
 
 .task-title {
-    font-size: 1.2rem;
     font-weight: bold;
 }
 .task-pop-up {
@@ -97,6 +96,20 @@ nav {
 
 .add-task-button {
     width: 30%;
-    padding: 2%;
-    margin: 2%;
+    padding: min(20px,2%);
+    margin: 1%;
+}
+
+.task-delete {
+
+    border: none;
+    outline: none;
+    background: none;
+    padding: 0;
+    margin: 0;
+    /* Add any other styling you want */
+    cursor: pointer;
+    color: red;
+    font-weight: 800;
+
 }
