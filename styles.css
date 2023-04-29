@@ -7,7 +7,7 @@ body {
 nav {
     background-color: aliceblue;
     border-bottom: 5px rgb(36, 139, 139) solid;
-    padding: 3%;
+    padding: min(40px, 3%);
     display: flex;
     justify-content: center;
     font-size: 35px;
@@ -57,7 +57,7 @@ nav {
 .project-banner {
     display: flex;
     background-color: rgb(36, 139, 139);
-    padding: 3%;
+    padding: min(30px,3%);
     margin: 2%;
     font-size: 30px;
     font-weight: 700;
